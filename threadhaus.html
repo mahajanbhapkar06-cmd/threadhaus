@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THREADHAUS — Men's Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0A0A0A;
+    --white: #F8F5F0;
+    --cream: #EDE8DF;
+    --accent: #C8A96E;
+    --accent-dark: #9B7E4B;
+    --red: #C0392B;
+    --gray-100: #F0EDE8;
+    --gray-200: #D8D4CC;
+    --gray-400: #9A9590;
+    --gray-700: #3A3733;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--black); font-family: var(--font-body); overflow-x: hidden; }
+
+  /* ──── ANNOUNCEMENT BAR ──── */
+  .announcement {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .announcement span { color: var(--accent); margin: 0 6px; }
+
+  /* ──── NAV ──── */
+  nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 68px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 32px;
+    letter-spacing: 4px;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--black); font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
+    position: relative; padding-bottom: 4px; transition: color .2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1.5px; background: var(--accent);
+    transition: width .3s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-icons { display: flex; align-items: center; gap: 20px; }
+  .nav-icons svg { width: 22px; height: 22px; cursor: pointer; transition: color .2s; }
+  .nav-icons svg:hover { color: var(--accent); }
+  .cart-btn {
+    background: var(--black); color: var(--white);
+    border: none; padding: 10px 22px; font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; font-family: var(--font-body); font-weight: 500;
+    cursor: pointer; transition: background .2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cart-btn:hover { background: var(--accent); }
+  .cart-badge {
+    background: var(--accent); color: var(--black);
+    border-radius: 50%; width: 18px; height: 18px;
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ──── HERO ──── */
+  .hero {
+    min-height: calc(100vh - 98px);
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+  .hero-left {
+    background: var(--black);
+    display: flex; flex-direction: column;
+    justify-content: center; padding: 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: 'SS25';
+    position: absolute; right: -20px; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: var(--font-display);
+    font-size: 120px; color: rgba(200,169,110,0.08);
+    letter-spacing: 10px; white-space: nowrap;
+  }
+  .hero-tag {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px; font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-tag::before { content: ''; display: block; width: 40px; height: 1px; background: var(--accent); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 8vw, 110px);
+    line-height: 0.92; color: var(--white);
+    letter-spacing: 2px; margin-bottom: 32px;
+  }
+  .hero-title em { color: var(--accent); font-style: normal; display: block; }
+  .hero-desc {
+    font-size: 15px; line-height: 1.7; color: rgba(248,245,240,0.6);
+    max-width: 380px; margin-bottom: 48px; font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 16px; align-items: center; }
+  .btn-primary {
+    background: var(--accent); color: var(--black);
+    padding: 16px 36px; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 700; font-family: var(--font-body);
+    border: none; cursor: pointer; transition: all .25s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--white); }
+  .btn-ghost {
+    color: var(--white); border: 1px solid rgba(248,245,240,0.3);
+    padding: 15px 36px; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 500; font-family: var(--font-body);
+    background: none; cursor: pointer; transition: all .25s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats {
+    position: absolute; bottom: 48px; left: 80px;
+    display: flex; gap: 40px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display); font-size: 28px; color: var(--accent);
+    display: block;
+  }
+  .hero-stat-label {
+    font-size: 10px; letter-spacing: 2px; color: rgba(248,245,240,0.4);
+    text-transform: uppercase; margin-top: 2px;
+  }
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: var(--cream);
+  }
+  .hero-img-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; height: 100%; gap: 3px;
+  }
+  .hero-img-cell {
+    overflow: hidden; position: relative;
+  }
+  .hero-img-cell:first-child { grid-row: span 2; }
+  .hero-img-cell img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .6s ease;
+  }
+  .hero-img-cell:hover img { transform: scale(1.05); }
+  .hero-badge {
+    position: absolute; bottom: 20px; right: 20px;
+    background: var(--accent); color: var(--black);
+    padding: 8px 16px; font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ──── MARQUEE ──── */
+  .marquee-wrap {
+    background: var(--accent);
+    padding: 14px 0; overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 0;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: var(--font-display);
+    font-size: 18px; letter-spacing: 3px; color: var(--black);
+    padding: 0 40px; display: flex; align-items: center; gap: 40px;
+  }
+  .marquee-item::after { content: '✦'; font-size: 12px; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ──── SECTION HEADER ──── */
+  .section-header {
+    text-align: center; padding: 80px 40px 48px;
+  }
+  .section-tag {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px; font-weight: 500;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: 2px; line-height: 1;
+  }
+  .section-title em { color: var(--accent); font-style: normal; }
+
+  /* ──── CATEGORIES ──── */
+  .categories { padding: 0 40px 80px; }
+  .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .cat-card {
+    position: relative; overflow: hidden; cursor: pointer;
+    aspect-ratio: 3/4;
+    background: var(--gray-100);
+  }
+  .cat-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s ease;
+    filter: brightness(0.85);
+  }
+  .cat-card:hover img { transform: scale(1.06); filter: brightness(0.7); }
+  .cat-card-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 28px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+  }
+  .cat-count { font-size: 11px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .cat-name { font-family: var(--font-display); font-size: 28px; color: var(--white); letter-spacing: 2px; }
+  .cat-arrow {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(-8px);
+    transition: all .3s ease;
+  }
+  .cat-card:hover .cat-arrow { opacity: 1; transform: translateY(0); }
+
+  /* ──── PRODUCTS ──── */
+  .products-section { padding: 0 40px 80px; }
+  .products-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .filter-tabs { display: flex; gap: 4px; }
+  .filter-tab {
+    padding: 10px 22px; font-size: 12px; letter-spacing: 1px;
+    text-transform: uppercase; font-weight: 500; border: 1px solid var(--gray-200);
+    background: none; cursor: pointer; transition: all .2s;
+    font-family: var(--font-body);
+  }
+  .filter-tab.active, .filter-tab:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  .sort-select {
+    padding: 10px 18px; border: 1px solid var(--gray-200);
+    font-size: 12px; letter-spacing: 1px; background: none;
+    font-family: var(--font-body); cursor: pointer;
+    text-transform: uppercase; appearance: none;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230A0A0A'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+  }
+  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+
+  .product-card { cursor: pointer; }
+  .product-img-wrap {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4; background: var(--gray-100); margin-bottom: 16px;
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s ease;
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.04); }
+  .product-badges {
+    position: absolute; top: 14px; left: 14px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 4px 10px; display: inline-block;
+  }
+  .badge-new { background: var(--black); color: var(--white); }
+  .badge-sale { background: var(--red); color: var(--white); }
+  .badge-trending { background: var(--accent); color: var(--black); }
+  .product-actions {
+    position: absolute; bottom: 14px; left: 14px; right: 14px;
+    display: flex; gap: 8px;
+    opacity: 0; transform: translateY(10px);
+    transition: all .3s ease;
+  }
+  .product-card:hover .product-actions { opacity: 1; transform: translateY(0); }
+  .add-cart-btn {
+    flex: 1; background: var(--black); color: var(--white);
+    border: none; padding: 12px; font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: 600; font-family: var(--font-body);
+    cursor: pointer; transition: background .2s;
+  }
+  .add-cart-btn:hover { background: var(--accent); color: var(--black); }
+  .wishlist-btn {
+    width: 44px; background: var(--white); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wishlist-btn svg { width: 18px; height: 18px; }
+  .product-info { padding: 0 4px; }
+  .product-brand { font-size: 11px; letter-spacing: 2px; color: var(--gray-400); text-transform: uppercase; margin-bottom: 4px; }
+  .product-name { font-size: 14px; font-weight: 500; margin-bottom: 8px; line-height: 1.4; }
+  .product-colors { display: flex; gap: 6px; margin-bottom: 10px; }
+  .color-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 1px solid var(--gray-200); cursor: pointer;
+    transition: transform .2s;
+  }
+  .color-dot:hover { transform: scale(1.3); }
+  .color-dot.active { outline: 2px solid var(--black); outline-offset: 2px; }
+  .product-price { display: flex; align-items: center; gap: 10px; }
+  .price-current { font-size: 15px; font-weight: 700; }
+  .price-old { font-size: 13px; color: var(--gray-400); text-decoration: line-through; }
+  .price-discount { font-size: 12px; color: var(--red); font-weight: 600; }
+  .product-rating {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 6px;
+  }
+  .stars { color: var(--accent); font-size: 12px; letter-spacing: 1px; }
+  .rating-count { font-size: 11px; color: var(--gray-400); }
+
+  /* ──── STYLE GUIDE BANNER ──── */
+  .style-banner {
+    margin: 20px 40px 80px;
+    background: var(--black);
+    display: grid; grid-template-columns: 1fr 1fr;
+    overflow: hidden; min-height: 500px;
+  }
+  .style-banner-content {
+    padding: 80px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .style-banner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 4vw, 64px); color: var(--white);
+    letter-spacing: 2px; line-height: 1.05; margin-bottom: 24px;
+  }
+  .style-banner h2 em { color: var(--accent); font-style: normal; }
+  .style-banner p { color: rgba(248,245,240,0.55); font-size: 14px; line-height: 1.8; margin-bottom: 40px; max-width: 360px; }
+  .style-banner-img { overflow: hidden; position: relative; }
+  .style-banner-img img { width: 100%; height: 100%; object-fit: cover; }
+  .style-banner-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(200,169,110,0.15) 0%, transparent 60%);
+  }
+
+  /* ──── FEATURES ──── */
+  .features { padding: 80px 40px; background: var(--cream); }
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .feature-item { text-align: center; }
+  .feature-icon {
+    width: 56px; height: 56px; margin: 0 auto 20px;
+    border: 1px solid var(--gray-200); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--white);
+  }
+  .feature-icon svg { width: 24px; height: 24px; }
+  .feature-title { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .feature-text { font-size: 13px; color: var(--gray-400); line-height: 1.6; }
+
+  /* ──── BESTSELLERS SLIM ──── */
+  .bestsellers { padding: 0 40px 80px; }
+  .bestsellers-list {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+  }
+  .bestseller-item {
+    display: grid; grid-template-columns: 180px 1fr;
+    background: var(--gray-100); overflow: hidden; cursor: pointer;
+    transition: background .2s;
+  }
+  .bestseller-item:hover { background: var(--cream); }
+  .bestseller-img { overflow: hidden; height: 200px; }
+  .bestseller-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .bestseller-item:hover .bestseller-img img { transform: scale(1.05); }
+  .bestseller-info {
+    padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  }
+  .bs-rank {
+    font-family: var(--font-display); font-size: 40px;
+    color: var(--gray-200); line-height: 1;
+  }
+  .bs-name { font-size: 15px; font-weight: 600; line-height: 1.3; }
+  .bs-sub { font-size: 12px; color: var(--gray-400); letter-spacing: 0.5px; }
+  .bs-price { font-size: 16px; font-weight: 700; margin-top: 4px; }
+
+  /* ──── TESTIMONIALS ──── */
+  .testimonials { padding: 80px 40px; background: var(--black); }
+  .testimonials .section-title { color: var(--white); }
+  .testimonials .section-tag { color: var(--accent); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testimonial-card {
+    border: 1px solid rgba(248,245,240,0.1);
+    padding: 32px; position: relative;
+  }
+  .testimonial-card::before {
+    content: '"';
+    font-family: var(--font-serif); font-size: 80px;
+    color: var(--accent); position: absolute; top: 10px; left: 24px;
+    line-height: 1; opacity: 0.6;
+  }
+  .testimonial-text { font-size: 14px; line-height: 1.8; color: rgba(248,245,240,0.7); margin-bottom: 24px; padding-top: 32px; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); display: flex; align-items: center;
+    justify-content: center; font-weight: 700; font-size: 14px; color: var(--black);
+    flex-shrink: 0;
+  }
+  .author-name { font-size: 13px; font-weight: 600; color: var(--white); }
+  .author-location { font-size: 11px; color: var(--gray-400); letter-spacing: 0.5px; }
+  .testimonial-stars { color: var(--accent); font-size: 13px; margin-bottom: 12px; }
+
+  /* ──── NEWSLETTER ──── */
+  .newsletter {
+    padding: 100px 40px; text-align: center;
+    background: var(--cream);
+  }
+  .newsletter h2 {
+    font-family: var(--font-display); font-size: clamp(36px, 4vw, 54px);
+    letter-spacing: 2px; margin-bottom: 16px;
+  }
+  .newsletter p { color: var(--gray-400); font-size: 15px; margin-bottom: 40px; }
+  .newsletter-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+  .newsletter-form input {
+    flex: 1; padding: 16px 24px; border: 1px solid var(--gray-200);
+    font-size: 14px; font-family: var(--font-body);
+    background: var(--white); outline: none;
+    border-right: none;
+  }
+  .newsletter-form input:focus { border-color: var(--black); }
+  .newsletter-form button {
+    background: var(--black); color: var(--white);
+    border: none; padding: 16px 32px; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    font-family: var(--font-body); cursor: pointer; transition: background .2s;
+  }
+  .newsletter-form button:hover { background: var(--accent); color: var(--black); }
+
+  /* ──── FOOTER ──── */
+  footer {
+    background: var(--black); color: var(--white);
+    padding: 60px 40px 0;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px; padding-bottom: 60px;
+    border-bottom: 1px solid rgba(248,245,240,0.1);
+  }
+  .footer-brand h3 {
+    font-family: var(--font-display); font-size: 28px; letter-spacing: 4px;
+    margin-bottom: 16px; color: var(--white);
+  }
+  .footer-brand h3 span { color: var(--accent); }
+  .footer-brand p {
+    font-size: 13px; line-height: 1.8; color: rgba(248,245,240,0.45);
+    max-width: 300px; margin-bottom: 28px;
+  }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 36px; height: 36px; border: 1px solid rgba(248,245,240,0.15);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .2s;
+  }
+  .social-btn:hover { border-color: var(--accent); background: var(--accent); }
+  .social-btn svg { width: 16px; height: 16px; }
+  .footer-col h4 {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 20px; color: var(--accent);
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a {
+    font-size: 13px; color: rgba(248,245,240,0.5); text-decoration: none;
+    transition: color .2s; letter-spacing: 0.5px;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 0; font-size: 12px; color: rgba(248,245,240,0.3);
+  }
+  .footer-bottom a { color: rgba(248,245,240,0.3); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--accent); }
+  .payment-icons { display: flex; gap: 8px; }
+  .payment-icon {
+    background: rgba(248,245,240,0.08); color: rgba(248,245,240,0.5);
+    padding: 4px 10px; font-size: 11px; letter-spacing: 0.5px; border-radius: 3px;
+  }
+
+  /* ──── PRODUCT MODAL ──── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.7);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); width: 90%; max-width: 900px;
+    max-height: 90vh; overflow-y: auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .modal-img { background: var(--gray-100); }
+  .modal-img img { width: 100%; height: 100%; object-fit: cover; min-height: 500px; }
+  .modal-content { padding: 48px 40px; display: flex; flex-direction: column; }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--white); border: none; width: 40px; height: 40px;
+    cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center;
+  }
+  .modal-brand { font-size: 11px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .modal-name { font-size: 24px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; }
+  .modal-price { font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+  .modal-price span { font-size: 15px; color: var(--gray-400); text-decoration: line-through; margin-left: 10px; }
+  .modal-section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px; font-weight: 600; }
+  .modal-sizes { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .size-btn {
+    width: 48px; height: 48px; border: 1px solid var(--gray-200);
+    font-size: 13px; font-weight: 500; background: none; cursor: pointer;
+    transition: all .2s; font-family: var(--font-body);
+  }
+  .size-btn.active, .size-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  .modal-colors { display: flex; gap: 10px; margin-bottom: 32px; }
+  .modal-color {
+    width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+    border: 2px solid transparent; transition: all .2s;
+  }
+  .modal-color.active { border-color: var(--black); }
+  .modal-add-btn {
+    background: var(--black); color: var(--white);
+    width: 100%; padding: 18px; font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 600; border: none; cursor: pointer;
+    font-family: var(--font-body); transition: background .2s; margin-bottom: 12px;
+  }
+  .modal-add-btn:hover { background: var(--accent); color: var(--black); }
+  .modal-wishlist-btn {
+    width: 100%; padding: 16px; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 500; border: 1px solid var(--gray-200);
+    background: none; cursor: pointer; font-family: var(--font-body); transition: all .2s;
+  }
+  .modal-wishlist-btn:hover { border-color: var(--black); }
+  .modal-description { font-size: 13px; line-height: 1.8; color: var(--gray-400); margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--gray-100); }
+
+  /* ──── TOAST ──── */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 99999;
+    background: var(--black); color: var(--white);
+    padding: 16px 24px; font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+    transform: translateY(80px); opacity: 0;
+    transition: all .35s ease;
+    border-left: 3px solid var(--accent);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ──── SCROLLBAR ──── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--gray-100); }
+  ::-webkit-scrollbar-thumb { background: var(--gray-400); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* ──── ANIMATIONS ──── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0; animation: fadeUp .6s ease forwards;
+  }
+  .fade-up-1 { animation-delay: .1s; }
+  .fade-up-2 { animation-delay: .2s; }
+  .fade-up-3 { animation-delay: .3s; }
+  .fade-up-4 { animation-delay: .4s; }
+  .fade-up-5 { animation-delay: .5s; }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  FREE SHIPPING ON ORDERS ABOVE ₹999
+  <span>✦</span>
+  USE CODE <strong>THREAD10</strong> FOR 10% OFF YOUR FIRST ORDER
+  <span>✦</span>
+  NEW ARRIVALS EVERY FRIDAY
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">THREAD<span>HAUS</span></a>
+  <ul class="nav-links">
+    <li><a href="#new">New Arrivals</a></li>
+    <li><a href="#categories">T-Shirts</a></li>
+    <li><a href="#categories">Shirts</a></li>
+    <li><a href="#categories">Oversized</a></li>
+    <li><a href="#categories">Co-ords</a></li>
+    <li><a href="#bestsellers">Sale</a></li>
+  </ul>
+  <div class="nav-icons">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    </svg>
+    <button class="cart-btn" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+      </svg>
+      BAG <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag fade-up fade-up-1">New Collection 2025</div>
+    <h1 class="hero-title fade-up fade-up-2">
+      WEAR THE
+      <em>FUTURE</em>
+      NOW
+    </h1>
+    <p class="hero-desc fade-up fade-up-3">
+      Bold cuts. Raw fabrics. Zero compromises. The SS25 collection is built for men who move between boardrooms and streets.
+    </p>
+    <div class="hero-ctas fade-up fade-up-4">
+      <a href="#new" class="btn-primary">Shop New Arrivals</a>
+      <a href="#categories" class="btn-ghost">View Lookbook</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">500+</span>
+        <div class="hero-stat-label">Styles</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">4.8★</span>
+        <div class="hero-stat-label">Rating</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">50K+</span>
+        <div class="hero-stat-label">Customers</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1618517351616-38fb9c5210c6?w=600&q=80" alt="Men's Fashion">
+      </div>
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Casual Shirts">
+        <div class="hero-badge">NEW IN</div>
+      </div>
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=400&q=80" alt="Street Style">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item">NEW ARRIVALS</div>
+    <div class="marquee-item">OVERSIZED TEES</div>
+    <div class="marquee-item">PREMIUM COTTON</div>
+    <div class="marquee-item">LINEN SHIRTS</div>
+    <div class="marquee-item">GRAPHIC PRINTS</div>
+    <div class="marquee-item">CO-ORD SETS</div>
+    <div class="marquee-item">STREETWEAR</div>
+    <div class="marquee-item">SS25 COLLECTION</div>
+    <div class="marquee-item">NEW ARRIVALS</div>
+    <div class="marquee-item">OVERSIZED TEES</div>
+    <div class="marquee-item">PREMIUM COTTON</div>
+    <div class="marquee-item">LINEN SHIRTS</div>
+    <div class="marquee-item">GRAPHIC PRINTS</div>
+    <div class="marquee-item">CO-ORD SETS</div>
+    <div class="marquee-item">STREETWEAR</div>
+    <div class="marquee-item">SS25 COLLECTION</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="section-header">
+    <div class="section-tag">Browse By Type</div>
+    <h2 class="section-title">SHOP BY <em>CATEGORY</em></h2>
+  </div>
+  <div class="categories" style="padding-top:0">
+    <div class="categories-grid">
+      <div class="cat-card">
+        <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=80" alt="Graphic T-Shirts">
+        <div class="cat-card-overlay">
+          <div class="cat-count">142 styles</div>
+          <div class="cat-name">GRAPHIC TEES</div>
+        </div>
+        <div class="cat-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="cat-card">
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80" alt="Oversized">
+        <div class="cat-card-overlay">
+          <div class="cat-count">89 styles</div>
+          <div class="cat-name">OVERSIZED</div>
+        </div>
+        <div class="cat-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="cat-card">
+        <img src="https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=500&q=80" alt="Shirts">
+        <div class="cat-card-overlay">
+          <div class="cat-count">211 styles</div>
+          <div class="cat-name">CASUAL SHIRTS</div>
+        </div>
+        <div class="cat-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <div class="cat-card">
+        <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=500&q=80" alt="Linen">
+        <div class="cat-card-overlay">
+          <div class="cat-count">56 styles</div>
+          <div class="cat-name">LINEN SHIRTS</div>
+        </div>
+        <div class="cat-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="new">
+  <div class="section-header">
+    <div class="section-tag">Just Dropped</div>
+    <h2 class="section-title">NEW <em>ARRIVALS</em></h2>
+  </div>
+  <div class="products-section" style="padding-top:0">
+    <div class="products-controls">
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterProducts(this,'all')">All</button>
+        <button class="filter-tab" onclick="filterProducts(this,'tshirt')">T-Shirts</button>
+        <button class="filter-tab" onclick="filterProducts(this,'shirt')">Shirts</button>
+        <button class="filter-tab" onclick="filterProducts(this,'oversized')">Oversized</button>
+      </div>
+      <select class="sort-select">
+        <option>Newest First</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Best Sellers</option>
+      </select>
+    </div>
+    <div class="products-grid" id="products-grid">
+      <!-- Products injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- STYLE BANNER -->
+<div class="style-banner" style="margin:0 40px 80px">
+  <div class="style-banner-content">
+    <span style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block">Style Guide</span>
+    <h2>BUILD YOUR<br><em>SIGNATURE</em><br>LOOK</h2>
+    <p>From beach-ready linens to urban street fits — curated looks styled by our in-house team to help you dress with intention.</p>
+    <a href="#" class="btn-primary">Explore Lookbook</a>
+  </div>
+  <div class="style-banner-img">
+    <img src="https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=800&q=80" alt="Style Guide">
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+      </div>
+      <div class="feature-title">Free Shipping</div>
+      <div class="feature-text">On all orders above ₹999 across India</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.78"/>
+        </svg>
+      </div>
+      <div class="feature-title">Easy Returns</div>
+      <div class="feature-text">Hassle-free 7-day return policy</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <div class="feature-title">Premium Quality</div>
+      <div class="feature-text">100% combed cotton fabrics, GOTS certified</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <div class="feature-title">Fast Delivery</div>
+      <div class="feature-text">2–5 day express delivery PAN India</div>
+    </div>
+  </div>
+</div>
+
+<!-- BESTSELLERS -->
+<section id="bestsellers">
+  <div class="section-header">
+    <div class="section-tag">Chart Toppers</div>
+    <h2 class="section-title">BEST <em>SELLERS</em></h2>
+  </div>
+  <div class="bestsellers">
+    <div class="bestsellers-list">
+      <div class="bestseller-item">
+        <div class="bestseller-img">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80" alt="">
+        </div>
+        <div class="bestseller-info">
+          <div class="bs-rank">01</div>
+          <div class="bs-name">Essential Black Oversized Tee</div>
+          <div class="bs-sub">Unisex fit · 240 GSM cotton</div>
+          <div class="bs-price">₹ 899</div>
+        </div>
+      </div>
+      <div class="bestseller-item">
+        <div class="bestseller-img">
+          <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400&q=80" alt="">
+        </div>
+        <div class="bestseller-info">
+          <div class="bs-rank">02</div>
+          <div class="bs-name">Pastel Linen Shirt — Sage</div>
+          <div class="bs-sub">Relaxed fit · 100% Linen</div>
+          <div class="bs-price">₹ 1,499</div>
+        </div>
+      </div>
+      <div class="bestseller-item">
+        <div class="bestseller-img">
+          <img src="https://images.unsplash.com/photo-1506634572416-48cdfe530110?w=400&q=80" alt="">
+        </div>
+        <div class="bestseller-info">
+          <div class="bs-rank">03</div>
+          <div class="bs-name">Abstract Art Graphic Tee</div>
+          <div class="bs-sub">Regular fit · Screen print</div>
+          <div class="bs-price">₹ 699</div>
+        </div>
+      </div>
+      <div class="bestseller-item">
+        <div class="bestseller-img">
+          <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&q=80" alt="">
+        </div>
+        <div class="bestseller-info">
+          <div class="bs-rank">04</div>
+          <div class="bs-name">Cuban Collar Printed Shirt</div>
+          <div class="bs-sub">Boxy fit · Viscose blend</div>
+          <div class="bs-price">₹ 1,299</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header" style="padding-bottom:0">
+    <div class="section-tag">Real Reviews</div>
+    <h2 class="section-title" style="color:var(--white)">WHAT THEY <em>SAY</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Obsessed with the quality. The oversized tees have the perfect drop shoulder and the fabric feels premium. Sizing was accurate and delivery was super fast.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RK</div>
+        <div>
+          <div class="author-name">Rahul K.</div>
+          <div class="author-location">Mumbai</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Bought the linen shirts for a beach holiday and got so many compliments. The fit is chef's kiss — not too boxy, not too fitted. Will definitely reorder.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AS</div>
+        <div>
+          <div class="author-name">Arjun S.</div>
+          <div class="author-location">Bangalore</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★☆</div>
+      <p class="testimonial-text">Love the aesthetic and variety. The graphic tee collection is fire. My go-to for gifting. The packaging is also so clean — feels like you're unboxing a luxury brand.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">VP</div>
+        <div>
+          <div class="author-name">Varun P.</div>
+          <div class="author-location">Delhi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="section-tag">Stay Updated</div>
+  <h2>JOIN THE <em style="font-family:var(--font-serif);font-style:italic">Threadhaus</em> CIRCLE</h2>
+  <p>Get early access to drops, exclusive discounts & style inspo straight to your inbox.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Enter your email address">
+    <button type="button">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>THREAD<span>HAUS</span></h3>
+      <p>Curating the best in contemporary Indian menswear. Bold, accessible, and always on-trend.</p>
+      <div class="footer-socials">
+        <div class="social-btn" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="social-btn" title="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+          </svg>
+        </div>
+        <div class="social-btn" title="Twitter/X">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">T-Shirts</a></li>
+        <li><a href="#">Casual Shirts</a></li>
+        <li><a href="#">Oversized Tees</a></li>
+        <li><a href="#">Linen Collection</a></li>
+        <li><a href="#">Graphic Prints</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns & Exchanges</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 Threadhaus. All rights reserved. Made with ♥ in India.</div>
+    <div class="payment-icons">
+      <span class="payment-icon">UPI</span>
+      <span class="payment-icon">VISA</span>
+      <span class="payment-icon">MASTERCARD</span>
+      <span class="payment-icon">COD</span>
+      <span class="payment-icon">EMI</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOnBg(event)">
+  <div class="modal" id="modal-content">
+    <div class="modal-img">
+      <img id="modal-img" src="" alt="">
+    </div>
+    <div class="modal-content">
+      <div class="modal-brand" id="modal-brand"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-price" id="modal-price"></div>
+      <div class="modal-section-label">Select Size</div>
+      <div class="modal-sizes">
+        <button class="size-btn" onclick="selectSize(this)">XS</button>
+        <button class="size-btn active" onclick="selectSize(this)">S</button>
+        <button class="size-btn" onclick="selectSize(this)">M</button>
+        <button class="size-btn" onclick="selectSize(this)">L</button>
+        <button class="size-btn" onclick="selectSize(this)">XL</button>
+        <button class="size-btn" onclick="selectSize(this)">XXL</button>
+      </div>
+      <div class="modal-section-label">Color</div>
+      <div class="modal-colors" id="modal-colors"></div>
+      <button class="modal-add-btn" onclick="addToCart()">Add to Bag</button>
+      <button class="modal-wishlist-btn">♡ Add to Wishlist</button>
+      <div class="modal-description" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toast-msg">Added to bag!</span>
+</div>
+
+<script>
+const products = [
+  {
+    id:1, category:'tshirt',
+    brand:'Threadhaus Originals',
+    name:'Solar Flare Acid Wash Tee',
+    price:799, oldPrice:1199,
+    discount:33,
+    badge:'trending',
+    colors:['#2C2C2A','#8B4513','#4A6741'],
+    rating:4.8, reviews:312,
+    img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80',
+    desc:'A vintage-inspired acid wash tee with a relaxed silhouette. Made from 100% ring-spun cotton (180 GSM). Pre-washed for a worn-in feel from day one.'
+  },
+  {
+    id:2, category:'shirt',
+    brand:'Threadhaus Linen',
+    name:'Havana Breeze Open-Collar Shirt',
+    price:1299, oldPrice:null,
+    badge:'new',
+    colors:['#C2B280','#5F7A61','#8B9EB7'],
+    rating:4.9, reviews:89,
+    img:'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=500&q=80',
+    desc:'Our bestselling resort-ready shirt. Crafted from premium linen blend, with subtle texture and an oversized Cuban collar. Perfect for beach vacations or city brunches.'
+  },
+  {
+    id:3, category:'oversized',
+    brand:'Threadhaus Drop',
+    name:'Tokyo Grid Oversized Graphic Tee',
+    price:899, oldPrice:1299,
+    discount:31,
+    badge:'sale',
+    colors:['#0A0A0A','#F8F5F0','#C0392B'],
+    rating:4.7, reviews:541,
+    img:'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=80',
+    desc:'Bold graphic print inspired by Tokyo streetwear culture. Drop-shoulder fit, 240 GSM heavyweight cotton. Screen printed with water-based inks that last.'
+  },
+  {
+    id:4, category:'shirt',
+    brand:'Threadhaus SS25',
+    name:'Abstract Floral Camp Shirt',
+    price:1599, oldPrice:null,
+    badge:'new',
+    colors:['#E8D5C4','#4A6741','#2C3E50'],
+    rating:4.6, reviews:67,
+    img:'https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=500&q=80',
+    desc:'The camp collar shirt done right. All-over abstract floral print on a relaxed viscose fabric. Boxy fit with chest pocket. Perfect for the guy who dresses with intention.'
+  },
+  {
+    id:5, category:'tshirt',
+    brand:'Threadhaus Basics',
+    name:'Essential Supima Cotton Crew Tee',
+    price:599, oldPrice:799,
+    discount:25,
+    badge:null,
+    colors:['#F8F5F0','#0A0A0A','#4A6741','#8B7355'],
+    rating:4.9, reviews:1203,
+    img:'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80',
+    desc:'The perfect everyday tee. Made from 200 GSM Supima cotton — softer and more durable than regular cotton. Pre-shrunk, enzyme-washed for a naturally soft hand-feel.'
+  },
+  {
+    id:6, category:'shirt',
+    brand:'Threadhaus Studio',
+    name:'Indigo Washed Denim Overshirt',
+    price:1899, oldPrice:2499,
+    discount:24,
+    badge:'trending',
+    colors:['#4A5568','#2D3748','#718096'],
+    rating:4.8, reviews:178,
+    img:'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=500&q=80',
+    desc:'A modern take on the overshirt. Stone-washed denim fabric with a relaxed fit and dropped shoulders. Wear open as a jacket or buttoned up as a statement shirt.'
+  },
+  {
+    id:7, category:'oversized',
+    brand:'Threadhaus Drop',
+    name:'Retro Wave Heavyweight Hoodie Tee',
+    price:1099, oldPrice:null,
+    badge:'new',
+    colors:['#C0392B','#2C2C2A','#C8A96E'],
+    rating:4.7, reviews:94,
+    img:'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=500&q=80',
+    desc:'Not quite a tee, not quite a hoodie. A heavyweight 300 GSM oversized tee with a vintage retro wave print. The perfect oversized silhouette with ribbed cuffs.'
+  },
+  {
+    id:8, category:'tshirt',
+    brand:'Threadhaus Collabs',
+    name:'Minimalist Type-Face Print Tee',
+    price:749, oldPrice:999,
+    discount:25,
+    badge:null,
+    colors:['#F8F5F0','#C2B280','#2C3E50'],
+    rating:4.5, reviews:227,
+    img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80',
+    desc:'Clean and deliberate. A minimalist typeface graphic on organic cotton. The kind of tee that goes with everything but says something. 200 GSM combed cotton.'
+  }
+];
+
+let cartCount = 0;
+let currentProduct = null;
+let activeFilter = 'all';
+
+function renderProducts(filter) {
+  const grid = document.getElementById('products-grid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" onclick="openModal(${p.id})">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="product-badges">
+          ${p.badge === 'new' ? '<span class="badge badge-new">New</span>' : ''}
+          ${p.badge === 'sale' ? '<span class="badge badge-sale">Sale</span>' : ''}
+          ${p.badge === 'trending' ? '<span class="badge badge-trending">Trending</span>' : ''}
+        </div>
+        <div class="product-actions">
+          <button class="add-cart-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Quick Add</button>
+          <button class="wishlist-btn" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-colors">
+          ${p.colors.map((c,i) => `<div class="color-dot${i===0?' active':''}" style="background:${c}" onclick="event.stopPropagation()"></div>`).join('')}
+        </div>
+        <div class="product-price">
+          <span class="price-current">₹ ${p.price.toLocaleString('en-IN')}</span>
+          ${p.oldPrice ? `<span class="price-old">₹ ${p.oldPrice.toLocaleString('en-IN')}</span>` : ''}
+          ${p.discount ? `<span class="price-discount">${p.discount}% off</span>` : ''}
+        </div>
+        <div class="product-rating">
+          <span class="stars">${'★'.repeat(Math.floor(p.rating))}${p.rating % 1 >= 0.5 ? '½' : ''}</span>
+          <span class="rating-count">(${p.reviews})</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(btn, filter) {
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = filter;
+  renderProducts(filter);
+}
+
+function openModal(id) {
+  currentProduct = products.find(p => p.id === id);
+  if (!currentProduct) return;
+  document.getElementById('modal-img').src = currentProduct.img;
+  document.getElementById('modal-brand').textContent = currentProduct.brand;
+  document.getElementById('modal-name').textContent = currentProduct.name;
+  document.getElementById('modal-price').innerHTML = `₹ ${currentProduct.price.toLocaleString('en-IN')}${currentProduct.oldPrice ? `<span>₹ ${currentProduct.oldPrice.toLocaleString('en-IN')}</span>` : ''}`;
+  document.getElementById('modal-desc').textContent = currentProduct.desc;
+  document.getElementById('modal-colors').innerHTML = currentProduct.colors.map((c,i) =>
+    `<div class="modal-color${i===0?' active':''}" style="background:${c};border:2px solid ${i===0?'#0A0A0A':'transparent'}" onclick="selectModalColor(this)"></div>`
+  ).join('');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function selectSize(btn) {
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function selectModalColor(el) {
+  document.querySelectorAll('.modal-color').forEach(c => {
+    c.style.borderColor = 'transparent';
+    c.classList.remove('active');
+  });
+  el.style.borderColor = '#0A0A0A';
+  el.classList.add('active');
+}
+
+function addToCart() {
+  cartCount++;
+  document.getElementById('cart-count').textContent = cartCount;
+  closeModal();
+  showToast(`${currentProduct ? currentProduct.name.substring(0,25)+'...' : 'Item'} added to bag!`);
+}
+
+function quickAdd(id) {
+  const p = products.find(x => x.id === id);
+  cartCount++;
+  document.getElementById('cart-count').textContent = cartCount;
+  showToast(`${p.name.substring(0,25)}... added!`);
+}
+
+function openCart() {
+  showToast(cartCount > 0 ? `You have ${cartCount} item${cartCount>1?'s':''} in your bag` : 'Your bag is empty');
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Init
+renderProducts('all');
+
+// Color dot selection in grid
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('color-dot')) {
+    const parent = e.target.closest('.product-card').querySelectorAll('.color-dot');
+    parent.forEach(d => d.classList.remove('active'));
+    e.target.classList.add('active');
+  }
+});
+</script>
+</body>
+</html>
